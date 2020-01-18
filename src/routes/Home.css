@@ -1,0 +1,24 @@
+.channels {
+  margin: 100px;
+  margin-top: 30px;
+}
+
+.channels a {
+  text-decoration: none;
+  color: black;
+}
+
+.channelName {
+  font-weight: 1000px;
+  font-size: 37.5px;
+  list-style: none;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.channelName:hover {
+  background-color: #c2c2c2;
+  transition: all 0.3s linear;
+  box-shadow: 0 13px 27px -5px rgba(50, 50, 93, 0.25),
+    0 8px 16px -8px rgba(0, 0, 0, 0.3), 0 -6px 16px -6px rgba(0, 0, 0, 0.025);
+}

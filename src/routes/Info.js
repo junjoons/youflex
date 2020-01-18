@@ -1,4 +1,6 @@
 import React from "react";
+import youtube_logo from "../img/youtube_logo.png";
+import "./Info.css";
 
 class Info extends React.Component {
   componentDidMount() {
@@ -17,13 +19,13 @@ class Info extends React.Component {
         }
       } = this.props;
       return (
-        <div>
-          <h1>{name}</h1>
-          <span>{description}</span>
-          <a href={link}>
+        <div className="info">
+          <h1 className="info__name">{name}</h1>
+          <span className="info__description">{description}</span>
+          <a className="info__link" href={link}>
             <img
-              className="channel_img"
-              src="https://image.flaticon.com/icons/svg/1384/1384060.svg"
+              className="info__img"
+              src={youtube_logo}
               alt="Link to Creator's Channel"
             />
           </a>

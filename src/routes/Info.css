@@ -1,0 +1,19 @@
+.info {
+  padding: 50px;
+}
+
+.info__name {
+  font-size: 100px;
+  margin: 0px;
+  font-weight: 1000;
+}
+.info__description {
+  font-size: 25px;
+  font-weight: 100;
+}
+
+.info__img {
+  margin: 20px 0 0 0;
+  max-width: 200px;
+  display: block;
+}
