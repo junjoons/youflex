@@ -1,14 +1,37 @@
 import React from "react";
 
-class Info extends React.component {
+class Info extends React.Component {
+  componentDidMount() {
+    const { location, history } = this.props;
+    if (location.state === undefined) {
+      history.push("/");
+    }
+    console.log(location.state);
+  }
   render() {
     const { location } = this.props;
-    console.log(location);
-    return (
-      <div>
-        <h1>this.is.info!!!</h1>
-      </div>
-    );
+    if (location.state) {
+      const {
+        location: {
+          state: { name, description, link }
+        }
+      } = this.props;
+      return (
+        <div>
+          <h1>{name}</h1>
+          <span>{description}</span>
+          <a href={link}>
+            <img
+              className="channel_img"
+              src="https://image.flaticon.com/icons/svg/1384/1384060.svg"
+              alt="Link to Creator's Channel"
+            />
+          </a>
+        </div>
+      );
+    } else {
+      return null;
+    }
   }
 }
 

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 class Home extends React.Component {
   render() {
@@ -6,7 +7,19 @@ class Home extends React.Component {
     return (
       <div className="container">
         {channelData.map(channel => (
-          <li>{channel.name}</li>
+          <Link
+            to={{
+              pathname: `channel:${channel.id}`,
+              state: {
+                name: channel.name,
+                link: channel.channelLink,
+                description: channel.description
+              }
+            }}
+            key={channel.id}
+          >
+            <li className="channelName">{channel.name}</li>
+          </Link>
         ))}
       </div>
     );

@@ -2,6 +2,7 @@ import React from "react";
 import { HashRouter, Route } from "react-router-dom";
 import Home from "./Home";
 import Info from "./Info";
+import "./App.css";
 
 function App() {
   return (
