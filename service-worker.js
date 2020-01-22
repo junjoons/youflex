@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/youflix/precache-manifest.fd22e04d419871d9c0ffff993da81859.js"
+  "/youflix/precache-manifest.c2b47d86c5c3e86af0b510ab1c503741.js"
 );
 
 self.addEventListener('message', (event) => {

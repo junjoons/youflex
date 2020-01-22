@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "08cf9c4b3095c29a1073a0d92335216f",
+    "revision": "487103aae95610f1e424c96895702f41",
     "url": "/youflix/index.html"
   },
   {
