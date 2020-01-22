@@ -1,23 +1,23 @@
 {
   "files": {
     "main.css": "/youflix/static/css/main.f61c532c.chunk.css",
-    "main.js": "/youflix/static/js/main.88673a33.chunk.js",
-    "main.js.map": "/youflix/static/js/main.88673a33.chunk.js.map",
+    "main.js": "/youflix/static/js/main.050a55a9.chunk.js",
+    "main.js.map": "/youflix/static/js/main.050a55a9.chunk.js.map",
     "runtime-main.js": "/youflix/static/js/runtime-main.d890f1b4.js",
     "runtime-main.js.map": "/youflix/static/js/runtime-main.d890f1b4.js.map",
-    "static/js/2.1a440238.chunk.js": "/youflix/static/js/2.1a440238.chunk.js",
-    "static/js/2.1a440238.chunk.js.map": "/youflix/static/js/2.1a440238.chunk.js.map",
+    "static/js/2.d75d8afd.chunk.js": "/youflix/static/js/2.d75d8afd.chunk.js",
+    "static/js/2.d75d8afd.chunk.js.map": "/youflix/static/js/2.d75d8afd.chunk.js.map",
     "index.html": "/youflix/index.html",
-    "precache-manifest.53f1b283bf6ba5886e88397ebe5cccce.js": "/youflix/precache-manifest.53f1b283bf6ba5886e88397ebe5cccce.js",
+    "precache-manifest.fd22e04d419871d9c0ffff993da81859.js": "/youflix/precache-manifest.fd22e04d419871d9c0ffff993da81859.js",
     "service-worker.js": "/youflix/service-worker.js",
     "static/css/main.f61c532c.chunk.css.map": "/youflix/static/css/main.f61c532c.chunk.css.map",
-    "static/js/2.1a440238.chunk.js.LICENSE": "/youflix/static/js/2.1a440238.chunk.js.LICENSE",
+    "static/js/2.d75d8afd.chunk.js.LICENSE": "/youflix/static/js/2.d75d8afd.chunk.js.LICENSE",
     "static/media/youflix_logo.png": "/youflix/static/media/youflix_logo.67d8a93e.png"
   },
   "entrypoints": [
     "static/js/runtime-main.d890f1b4.js",
-    "static/js/2.1a440238.chunk.js",
+    "static/js/2.d75d8afd.chunk.js",
     "static/css/main.f61c532c.chunk.css",
-    "static/js/main.88673a33.chunk.js"
+    "static/js/main.050a55a9.chunk.js"
   ]
 }

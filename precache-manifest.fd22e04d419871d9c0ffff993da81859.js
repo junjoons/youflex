@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "cfbc6c164b7118880455df5f80799c9d",
+    "revision": "08cf9c4b3095c29a1073a0d92335216f",
     "url": "/youflix/index.html"
   },
   {
-    "revision": "709a1b8f97bcd5939fbc",
+    "revision": "f3c8ab1923a7f8fa93c2",
     "url": "/youflix/static/css/main.f61c532c.chunk.css"
   },
   {
-    "revision": "b8e5cf053a28dc583781",
-    "url": "/youflix/static/js/2.1a440238.chunk.js"
+    "revision": "6700c330bd99aa4eb465",
+    "url": "/youflix/static/js/2.d75d8afd.chunk.js"
   },
   {
     "revision": "e928fe768baa9832b5bc57eae021f30c",
-    "url": "/youflix/static/js/2.1a440238.chunk.js.LICENSE"
+    "url": "/youflix/static/js/2.d75d8afd.chunk.js.LICENSE"
   },
   {
-    "revision": "709a1b8f97bcd5939fbc",
-    "url": "/youflix/static/js/main.88673a33.chunk.js"
+    "revision": "f3c8ab1923a7f8fa93c2",
+    "url": "/youflix/static/js/main.050a55a9.chunk.js"
   },
   {
     "revision": "ee8e000cff5cf31b98c2",
