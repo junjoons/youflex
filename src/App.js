@@ -7,7 +7,7 @@ import youflix_logo from "./img/youflix_logo.png";
 
 function App() {
   return (
-    <div clssName="app__component">
+    <div className="app__component">
       <HashRouter>
         <div className="youflixLogo">
           <Link to="/">
