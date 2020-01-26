@@ -19,7 +19,7 @@ function App() {
             />
           </Link>
         </div>
-        <SearchBar />
+        <SearchBar onFromSubmit={this.handleSubmit} />
         <Route path="/" exact={true} component={Home} />
         <Route path="/channel:id" component={Info} />
       </HashRouter>
