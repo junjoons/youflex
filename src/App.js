@@ -4,7 +4,6 @@ import Home from "./routes/Home";
 import Info from "./routes/Info";
 import "./App.css";
 import youflix_logo from "./img/youflix_logo.png";
-import SearchBar from "./components/SearchBar";
 
 function App() {
   return (
@@ -19,7 +18,6 @@ function App() {
             />
           </Link>
         </div>
-        <SearchBar onFromSubmit={this.handleSubmit} />
         <Route path="/" exact={true} component={Home} />
         <Route path="/channel:id" component={Info} />
       </HashRouter>
