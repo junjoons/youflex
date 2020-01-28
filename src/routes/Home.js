@@ -5,8 +5,14 @@ import youtube from "../api/youtube";
 
 class Home extends React.Component {
   state = {
-    isLoading: true
+    isLoading: true,
+    data: []
   };
+
+  helloWorld = () => {
+    console.log("WTF?");
+  };
+
   getData = async term => {
     const response = await youtube.get("search", {
       params: {
@@ -20,15 +26,27 @@ class Home extends React.Component {
     return response;
   };
 
+  renderData = () => {
+    const channelData = require("../data/data.json");
+    channelData.forEach((channel, index) => {
+      //console.log(this.getData(channel.name));
+      if (index === channelData.length - 1) {
+        this.setState({ isLoading: false });
+      }
+    });
+  };
+
   render() {
-    let channelData = require("../data/data.json");
+    const channelData = require("../data/data.json");
+    //let { isLoading, data } = this.state;
     //로딩이 완료되지 않았을떄 APIdata값을 받으려 하기 때문에 값이 제대로 나오지 않음. 고로 state에 isLoading 속성을 만들어 삼항 연산자로 구분하며 rendering하기
+    this.renderData();
     return (
       <div className="container">
         <div className="channels">
           {channelData.map(channel => {
-            const APIData = this.getData(channel.name);
-            console.log(APIData);
+            //this.setState({ data: data.concat(this.getData(channel)) });
+            //console.log(data, channelData.length);
             return (
               <Link
                 to={{
