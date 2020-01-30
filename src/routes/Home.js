@@ -10,6 +10,7 @@ class Home extends React.Component {
   };
 
   getData = async term => {
+    const channelData = require("../data/data.json");
     const response = await youtube.get("channels", {
       params: {
         part: "snippet",
@@ -22,15 +23,13 @@ class Home extends React.Component {
     const channel__thumbnail =
       response.data.items[0].snippet.thumbnails.default.url;
     const channel__name = response.data.items[0].snippet.title;
-    // console.log(channel__name, channel__thumbnail);
     const { data } = this.state;
+
     this.setState({ data: data.concat([[channel__name, channel__thumbnail]]) });
-    // console.log(this.state);
-    const channelData = require("../data/data.json");
+
     if (data.length === channelData.length - 1) {
       this.setState({ isLoading: false });
     }
-    console.log(this.state);
   };
 
   componentDidMount() {
@@ -44,7 +43,7 @@ class Home extends React.Component {
       return (
         <div className="container">
           <div className="channels">
-            {channelData.map((channel, index) => {
+            {channelData.map(channel => {
               return (
                 <Link
                   to={{
@@ -59,7 +58,6 @@ class Home extends React.Component {
                 >
                   <div className="channelName">
                     {data.map(data => {
-                      // console.log("data", data);
                       if (data[0] === channel.name) {
                         console.log(data[1]);
                         return <img src={data[1]} alt={data[0]} />;
@@ -67,7 +65,6 @@ class Home extends React.Component {
                         return null;
                       }
                     })}
-                    {/* <img src={this.state.data[index]} alt={channel.name} /> */}
                     <li className="channelName__name">{channel.name}</li>
                   </div>
                 </Link>
