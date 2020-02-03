@@ -10,7 +10,7 @@ class Home extends React.Component {
   };
 
   getData = async term => {
-    const channelData = require("../data/data.json");
+    // const channelData = require("../data/data.json");
     const response = await youtube.get("channels", {
       params: {
         part: "snippet",
@@ -19,53 +19,74 @@ class Home extends React.Component {
         id: term
       }
     });
+    return response;
+  };
 
-    const channel__thumbnail =
-      response.data.items[0].snippet.thumbnails.default.url;
-    const channel__name = response.data.items[0].snippet.title;
-    const { data } = this.state;
+  renderData = async term => {
+    // console.log(term);
+    await this.getData(term.channel__id).then(response =>
+      this.setState({
+        data: this.state.data.concat([
+          [
+            {
+              name: response.data.items[0].snippet.title,
+              id: response.data.items[0].id,
+              thumbnail: response.data.items[0].snippet.thumbnails.default.url
+            }
+          ]
+        ])
+      })
+    );
 
-    this.setState({ data: data.concat([[channel__name, channel__thumbnail]]) });
+    // const channel__thumbnail =
+    //   response.data.items[0].snippet.thumbnails.default.url;
+    // const channel__name = response.data.items[0].snippet.title;
+    // const { data } = this.state;
 
-    if (data.length === channelData.length - 1) {
-      this.setState({ isLoading: false });
-    }
+    // this.setState({ data: data.concat([[channel__name, channel__thumbnail]]) });
+
+    // if (data.length === channelData.length - 1) {
+    //   this.setState({ isLoading: false });
+    // }
+
+    // return await this.getData(term.channel__id);
   };
 
   componentDidMount() {
     const channelData = require("../data/data.json");
-    channelData.map(channel => this.getData(channel.channel__id));
+    const arrayLength = channelData.length - 1;
+    channelData.map((channel, index) => {
+      this.renderData(channel);
+      if (index === arrayLength) {
+        this.setState({ isLoading: false });
+      }
+      return null;
+    });
   }
   render() {
-    const channelData = require("../data/data.json");
+    // const channelData = require("../data/data.json");
     const { isLoading, data } = this.state;
     if (isLoading === false) {
       return (
         <div className="container">
           <div className="channels">
-            {channelData.map(channel => {
+            {data.map(data => {
+              // console.log(data);
               return (
                 <Link
                   to={{
-                    pathname: `channel:${channel.id}`,
+                    pathname: `channel:${data[0].id}`,
                     state: {
-                      name: channel.name,
-                      link: channel.channelLink,
-                      description: channel.description
+                      name: data[0].name,
+                      link: data[0].thumbnail
+                      // description: channel.description
                     }
                   }}
-                  key={channel.id}
+                  key={data[0].id}
                 >
                   <div className="channelName">
-                    {data.map(data => {
-                      if (data[0] === channel.name) {
-                        console.log(data[1]);
-                        return <img src={data[1]} alt={data[0]} />;
-                      } else {
-                        return null;
-                      }
-                    })}
-                    <li className="channelName__name">{channel.name}</li>
+                    <img src={data[0].thumbnail} alt={data[0].name} />
+                    <li className="channelName__name">{data[0].name}</li>
                   </div>
                 </Link>
               );

@@ -11,6 +11,7 @@ class Info extends React.Component {
     console.log(location.state);
   }
   render() {
+    console.log("pushed!");
     const { location } = this.props;
     if (location.state) {
       const {
