@@ -13,7 +13,7 @@ class Home extends React.Component {
   getData = async term => {
     const response = await youtube.get("channels", {
       params: {
-        part: "snippet",
+        part: "snippet", //brandingSettings로 ㄱㄱ
         maxResults: 1,
         key: "AIzaSyCHi-dsz2j6aoMSm2Sb9qr459qnz_9-S2g",
         id: term
