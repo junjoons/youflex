@@ -8,17 +8,29 @@
   color: black;
 }
 
-.channelName {
+.channels .channel {
   font-weight: 1000px;
   font-size: 37.5px;
   list-style: none;
   padding: 20px;
   border-radius: 5px;
+  display: flex;
+  align-items: center;
 }
 
-.channelName:hover {
+.channels .channel:hover {
   background-color: #c2c2c2;
   transition: all 0.3s linear;
   box-shadow: 0 13px 27px -5px rgba(50, 50, 93, 0.25),
     0 8px 16px -8px rgba(0, 0, 0, 0.3), 0 -6px 16px -6px rgba(0, 0, 0, 0.025);
 }
+
+.channel .channel__name {
+  margin: 25px;
+}
+
+.channel .channel__img {
+  border-radius: 100%;
+}
+/* .channel__img {
+} */

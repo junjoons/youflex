@@ -1,5 +1,4 @@
 import React from "react";
-// import youtube_logo from "../img/youtube_logo.png";
 import "./Info.css";
 
 class Info extends React.Component {
@@ -16,14 +15,16 @@ class Info extends React.Component {
     if (location.state) {
       const {
         location: {
-          state: { name, thumbnail }
+          state: { name, thumbnail, description, id }
         }
       } = this.props;
       return (
         <div className="info">
           <img className="info__img" src={thumbnail} alt={name} />
-          <h1 className="info__name">{name}</h1>
-          {/* <span className="info__description">{description}</span> */}
+          <div className="info__info">
+            <span className="info__description">{description}</span>
+            <h1 className="info__name">{name}</h1>
+          </div>
           {/* <a className="info__link" href={link}> */}
           {/* </a> */}
         </div>

@@ -11,7 +11,6 @@ class Home extends React.Component {
   };
 
   getData = async term => {
-    // const channelData = require("../data/data.json");
     const response = await youtube.get("channels", {
       params: {
         part: "snippet",
@@ -24,7 +23,6 @@ class Home extends React.Component {
   };
 
   renderData = async term => {
-    // console.log(term);
     await this.getData(term.channel__id).then(response =>
       this.setState({
         data: this.state.data.concat([
@@ -32,26 +30,14 @@ class Home extends React.Component {
             {
               name: response.data.items[0].snippet.title,
               id: response.data.items[0].id,
-              thumbnail: response.data.items[0].snippet.thumbnails.default.url
+              thumbnail: response.data.items[0].snippet.thumbnails.default.url,
+              high_thumbnail: response.data.items[0].snippet.thumbnails.high.url
             }
           ]
         ]),
         raw_data: this.state.raw_data.concat([response])
       })
     );
-
-    // const channel__thumbnail =
-    //   response.data.items[0].snippet.thumbnails.default.url;
-    // const channel__name = response.data.items[0].snippet.title;
-    // const { data } = this.state;
-
-    // this.setState({ data: data.concat([[channel__name, channel__thumbnail]]) });
-
-    // if (data.length === channelData.length - 1) {
-    //   this.setState({ isLoading: false });
-    // }
-
-    // return await this.getData(term.channel__id);
   };
 
   componentDidMount() {
@@ -66,16 +52,13 @@ class Home extends React.Component {
     });
   }
   render() {
-    // const channelData = require("../data/data.json");
     const { isLoading, data, raw_data } = this.state;
     if (isLoading === false) {
       return (
         <div className="container">
           <div className="channels">
             {data.map((data, index) => {
-              // console.log(data);
-              console.log(raw_data[index]);
-              console.log(raw_data[index].data.items[0].snippet.title);
+              console.log(index, raw_data[index]);
               const {
                 data: { items }
               } = raw_data[index];
@@ -83,21 +66,27 @@ class Home extends React.Component {
               const title = items[0].snippet.title;
               const description = items[0].snippet.description;
               const thumbnail = items[0].snippet.thumbnails.default.url;
+              const high_thumbnail = items[0].snippet.thumbnails.high.url;
               return (
                 <Link
                   to={{
                     pathname: `channel:${data[0].id}`,
                     state: {
-                      name: data[0].name,
-                      thumbnail: data[0].thumbnail
-                      // description: channel.description
+                      id: id,
+                      name: title,
+                      thumbnail: high_thumbnail,
+                      description: description
                     }
                   }}
                   key={data[0].id}
                 >
-                  <div className="channelName">
-                    <img src={data[0].thumbnail} alt={data[0].name} />
-                    <li className="channelName__name">{data[0].name}</li>
+                  <div className="channel">
+                    <img
+                      className="channel__img"
+                      src={data[0].thumbnail}
+                      alt={data[0].name}
+                    />
+                    <li className="channel__name">{data[0].name}</li>
                   </div>
                 </Link>
               );
