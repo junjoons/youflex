@@ -6,7 +6,8 @@ import youtube from "../api/youtube";
 class Home extends React.Component {
   state = {
     isLoading: true,
-    data: []
+    data: [],
+    raw_data: []
   };
 
   getData = async term => {
@@ -34,7 +35,8 @@ class Home extends React.Component {
               thumbnail: response.data.items[0].snippet.thumbnails.default.url
             }
           ]
-        ])
+        ]),
+        raw_data: this.state.raw_data.concat([response])
       })
     );
 
@@ -65,20 +67,29 @@ class Home extends React.Component {
   }
   render() {
     // const channelData = require("../data/data.json");
-    const { isLoading, data } = this.state;
+    const { isLoading, data, raw_data } = this.state;
     if (isLoading === false) {
       return (
         <div className="container">
           <div className="channels">
-            {data.map(data => {
+            {data.map((data, index) => {
               // console.log(data);
+              console.log(raw_data[index]);
+              console.log(raw_data[index].data.items[0].snippet.title);
+              const {
+                data: { items }
+              } = raw_data[index];
+              const id = items[0].id;
+              const title = items[0].snippet.title;
+              const description = items[0].snippet.description;
+              const thumbnail = items[0].snippet.thumbnails.default.url;
               return (
                 <Link
                   to={{
                     pathname: `channel:${data[0].id}`,
                     state: {
                       name: data[0].name,
-                      link: data[0].thumbnail
+                      thumbnail: data[0].thumbnail
                       // description: channel.description
                     }
                   }}
