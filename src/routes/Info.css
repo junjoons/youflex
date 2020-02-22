@@ -2,12 +2,12 @@
   padding: 50px;
   display: flex;
   align-items: flex-end;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
 .info__name {
   font-size: 100px;
-  margin: 20px 0 0 0;
+  margin: 5px 0 0 0;
   font-weight: 1000;
   display: block;
 }
