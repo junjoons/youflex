@@ -7,11 +7,7 @@ class Home extends React.Component {
   state = {
     isLoading: true,
     snippetData: [],
-    brandingSettingsData: [],
-    searchData: [],
-    raw_snippetData: [],
-    raw_brandingSettingsData: [],
-    raw_searchData: []
+    raw_snippetData: []
   };
 
   getSnippetData = async term => {
@@ -26,135 +22,63 @@ class Home extends React.Component {
     return response;
   };
 
-  getBrandingSettingsData = async term => {
-    const response = await youtube.get("channels", {
-      params: {
-        part: "brandingSettings",
-        maxResults: 1,
-        key: "AIzaSyCHi-dsz2j6aoMSm2Sb9qr459qnz_9-S2g",
-        id: term
-      }
-    });
-    console.log(response);
-    return response;
-  };
-
-  getSearchData = async term => {
-    const response = await youtube.get("search", {
-      params: {
-        part: "snippet",
-        maxResults: 1,
-        key: "AIzaSyCHi-dsz2j6aoMSm2Sb9qr459qnz_9-S2g",
-        q: term
-      }
-    });
-    return response;
-  };
-
   renderSnippetData = async term => {
-    await this.getSnippetData(term.channel__id).then(response =>
-      this.setState({
-        snippetData: this.state.snippetData.concat([
-          [
-            {
-              name: response.data.items[0].snippet.title,
-              id: response.data.items[0].id,
-              thumbnail: response.data.items[0].snippet.thumbnails.default.url,
-              high_thumbnail: response.data.items[0].snippet.thumbnails.high.url
-            }
-          ]
-        ]),
-        raw_data: this.state.raw_snippetData.concat([response])
-      })
-    );
-  };
-
-  renderBrandingSettingsData = async term => {
-    await this.getBrandingSettingsData(term.channel__id).then(response =>
-      this.setState({
-        brandingSettingsData: this.state.brandingSettingsData.concat([
-          [
-            {
-              name: response.data.items[0].brandingSettings.channel.title,
-              id: response.data.items[0].id,
-              banner:
-                response.data.items[0].brandingSettings.image.bannerImageUrl
-            }
-          ]
-        ]),
-        raw_data: this.state.raw_brandingSettingsData.concat([response])
-      })
-    );
-  };
-
-  renderSearchData = async term => {
-    await this.getSearchData(term.channel__id).then(response =>
-      this.setState({
-        searchData: this.state.searchData.concat([
-          [
-            {
-              name: response.data.items[0].snippet.title,
-              id: response.data.items[0].id,
-              thumbnail: response.data.items[0].snippet.thumbnails.default.url,
-              high_thumbnail: response.data.items[0].snippet.thumbnails.high.url
-            }
-          ]
-        ]),
-        raw_data: this.state.raw_searchData.concat([response])
-      })
-    );
+    const response = await this.getSnippetData(term);
+    console.log(response);
+    this.setState({
+      snippetData: this.state.snippetData.concat([
+        [
+          {
+            name: response.data.items[0].snippet.title,
+            id: response.data.items[0].id,
+            description: response.data.items[0].snippet.description,
+            thumbnail: response.data.items[0].snippet.thumbnails.default.url,
+            high_thumbnail: response.data.items[0].snippet.thumbnails.high.url
+          }
+        ]
+      ]),
+      raw_snippetData: this.state.raw_snippetData.concat([response])
+    });
+    console.log(this.state);
   };
 
   componentDidMount() {
     const channelData = require("../data/data.json");
     const arrayLength = channelData.length - 1;
-    channelData.map((channel, index) => {
-      this.renderBrandingSettingsData(channel);
+    channelData.map(async (channel, index) => {
+      await this.renderSnippetData(channel.channel__id);
+      console.log(index, arrayLength);
       if (index === arrayLength) {
         this.setState({ isLoading: false });
+        console.log(this.state);
       }
       return null;
     });
   }
   render() {
-    const {
-      isLoading,
-      snippetData,
-      brandingSettingsData,
-      searchData,
-      raw_data
-    } = this.state;
-    console.log(snippetData);
+    const { isLoading, snippetData, raw_snippetData } = this.state;
 
     if (isLoading === false) {
       return (
         <div className="container">
           <div className="channels">
-            {snippetData.map(index => {
-              console.log(index, raw_data[index]);
-              // const {
-              //   data: { items }
-              // } = raw_data[index];
-              // const id = items[0].id;
-              // const title = items[0].snippet.title;
-              // const description = items[0].snippet.description;
-              // const thumbnail = items[0].snippet.thumbnails.default.url;
-              // const high_thumbnail = items[0].snippet.thumbnails.high.url;
-              const id = snippetData[index].id;
-              const title = snippetData[index].title;
-              const description = snippetData[index].description;
-              const thumbnail = snippetData[index].thumbnail;
-              const high_thumbnail = snippetData[index].high_thumbnail;
-              console.log(id, title, description, thumbnail, high_thumbnail);
+            {snippetData.map((data, index) => {
+              console.log(data);
+              const id = data[0].id;
+              const title = data[0].name;
+              const description = data[0].description;
+              const thumbnail = data[0].thumbnail;
+              const high_thumbnail = data[0].high_thumbnail;
+              // console.log(id, title, description, thumbnail, high_thumbnail);
               return (
                 <Link
                   to={{
                     pathname: `channel:${id}`,
                     state: {
-                      id: id,
+                      id,
                       name: title,
                       thumbnail: high_thumbnail,
-                      description: description
+                      description
                     }
                   }}
                   key={id}
