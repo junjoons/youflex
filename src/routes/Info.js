@@ -85,7 +85,7 @@ class Info extends React.Component {
       const { videoList } = this.state;
       // console.log(raw_searchData);
       return (
-        <div className="info_container">
+        <div className="info__container">
           <div className="info">
             <img className="info__img" src={thumbnail} alt={name} />
             <div className="info__info">
@@ -99,6 +99,7 @@ class Info extends React.Component {
                 <embed
                   // id="ytplayer"
                   // type="text/html"
+                  className="video"
                   width="640"
                   height="360"
                   src={`https://www.youtube.com/v/${data}`}
