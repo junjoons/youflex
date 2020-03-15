@@ -7,70 +7,62 @@ class Home extends React.Component {
   state = {
     isLoading: true,
     snippetData: [],
-    raw_snippetData: []
+    raw_snippetData: [],
+    cycling: false
   };
 
-  getData = id => {
-    const channelData = require("../data/data.json");
-    channelData.map((channel, index) => {
-      function _promise() {
-        return new Promise(function(resolve, reject) {
-          const response = youtube.get("channels", {
-            params: {
-              part: "snippet",
-              maxResults: 1,
-              key: "AIzaSyBMlsbAuI4UsGFE24TDNwb5aE7byOo2KCw",
-              id: channel.channel__id
-            }
-          });
-          if (response) {
-            resolve(response);
-            console.log("API number " + index + " pre-pre-fetched!");
-          } else {
-            reject(
-              Error("failed on fetching API data. was api quota exeeded?")
-            );
-          }
-        });
+  fetchData = async channel => {
+    const response = youtube.get("channels", {
+      params: {
+        part: "snippet",
+        maxResults: 1,
+        key: "AIzaSyBMlsbAuI4UsGFE24TDNwb5aE7byOo2KCw",
+        id: channel.channel__id
       }
-      _promise(true)
-        .then(
-          response => {
-            console.log("API number " + index + " pre-fetched!");
-            this.setState({
-              snippetData: this.state.snippetData.concat([
-                [
-                  {
-                    name: response.data.items[0].snippet.title,
-                    id: response.data.items[0].id,
-                    description: response.data.items[0].snippet.description,
-                    thumbnail:
-                      response.data.items[0].snippet.thumbnails.default.url,
-                    high_thumbnail:
-                      response.data.items[0].snippet.thumbnails.high.url
-                  }
-                ]
-              ]),
-              raw_snippetData: this.state.raw_snippetData.concat([response])
-            });
-            console.log("API number " + index + " fetched!");
-          },
-          function(error) {
-            console.log(error);
+    });
+    return response;
+  };
+
+  saveData = async response => {
+    this.setState({
+      snippetData: this.state.snippetData.concat([
+        [
+          {
+            name: response.data.items[0].snippet.title,
+            id: response.data.items[0].id,
+            description: response.data.items[0].snippet.description,
+            thumbnail: response.data.items[0].snippet.thumbnails.default.url,
+            high_thumbnail: response.data.items[0].snippet.thumbnails.high.url
           }
-        )
-        .then(() => {
-          if (channelData.length - 1 === index) {
-            this.setState({ isLoading: false });
-            console.log("Loading Finished!");
-          }
-        });
+        ]
+      ]),
+      raw_snippetData: this.state.raw_snippetData.concat([response]),
+      cycling: true
+    });
+  };
+
+  disableIsLoading = async (index, array_length) => {
+    this.setState({ cycling: false });
+    if (index === array_length - 1) {
+      this.setState({ isLoading: false });
+    }
+  };
+
+  getData = async () => {
+    const channelData = require("../data/data.json");
+    channelData.map(async (channel, index) => {
+      const API_data = await this.fetchData(channel);
+      await this.saveData(API_data);
+      if (this.state.cycling === true) {
+        await this.disableIsLoading(index, channelData.length);
+      }
     });
   };
 
   componentDidMount() {
     this.getData();
   }
+
   render() {
     const { isLoading, snippetData, raw_snippetData } = this.state;
 

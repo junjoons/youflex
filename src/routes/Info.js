@@ -16,7 +16,7 @@ class Info extends React.Component {
         part: "snippet",
         maxResults: 4,
         key: "AIzaSyB1IbUaKMQHmhBjm-Nwo9kcGzRqyRZIhSU",
-        q: term
+        channelId: term
       }
     });
     return response;
@@ -59,8 +59,8 @@ class Info extends React.Component {
         this.setState({
           videoList: this.state.videoList.concat(data.id.videoId)
         });
-        return null;
       }
+      return null;
     });
     console.log(this.state.videoList);
   };
